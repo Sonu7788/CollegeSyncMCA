@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { jsPDF } from 'jspdf';
+import api from './api';
 
 export default function StudentDashboard({ user }) {
   const [classes, setClasses] = useState([]);
@@ -47,18 +48,19 @@ export default function StudentDashboard({ user }) {
 
     // Iterate through all classes the student is in
     for (const cls of classList) {
-      try {
-        const sRes = await axios.get(`http://localhost:5000/api/sessions/class/${cls._id}`);
-        const sessions = sRes.data;
-        
-        totalSessionsHeld += sessions.length;
-        
-        // Count how many times this student appears in these sessions
-        const attendedCount = sessions.filter(s => s.attendedBy.includes(user._id)).length;
-        totalAttended += attendedCount;
-      } catch (err) {
-        console.error(err);
-      }
+     try {
+  // UPDATED: Use 'api' (removes hardcoded localhost)
+  const sRes = await api.get(`/sessions/class/${cls._id}`);
+  const sessions = sRes.data;
+  
+  totalSessionsHeld += sessions.length;
+  
+  // Count how many times this student appears in these sessions
+  const attendedCount = sessions.filter(s => s.attendedBy.includes(user._id)).length;
+  totalAttended += attendedCount;
+} catch (err) {
+  console.error(err);
+}
     }
 
     const percent = totalSessionsHeld === 0 ? 0 : Math.round((totalAttended / totalSessionsHeld) * 100);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import api from './api';
 export default function TeacherDashboard({ user }) {
   const [apps, setApps] = useState([]);
   
