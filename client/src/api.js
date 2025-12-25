@@ -3,7 +3,7 @@
     try {
       const branches = newEvent.branches ? newEvent.branches.split(',') : [user.branch];
       
-      await axios.post('http://localhost:5000/api/events', { 
+      await axios.post('https://collegesyncmca.onrender.com', { 
         ...newEvent, 
         attendanceCode: newEvent.code, // <--- THIS LINE FIXES THE ERROR
         branches, 
