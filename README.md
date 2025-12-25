@@ -37,4 +37,8 @@ Terminal 2 (Frontend):
 cd clientnpm start
 Access the App
 Frontend: http://localhost:3000
+<<<<<<< HEAD
 Backend: http://localhost:5000
+=======
+Backend: http://localhost:5000
+>>>>>>> a7781edb2665dda8729e983cc17b4f529efa4529
